@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="./static/lib/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./static/lib/css/keen-dashboards.css">
+  <link href='./static/lib/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="./static/lib/css/dc.css"/>
+  <link rel="stylesheet" type="text/css" href="./static/css/custom.css"/>
+  <link rel="stylesheet" href="./static/lib/css/dc.css">
+  <link rel="stylesheet" href="./static/css/custom.css">
+  <script src="./static/lib/js/jquery.min.js"></script>
+  <script src="./static/lib/js/bootstrap.min.js"></script>
+  <script src="./static/lib/js/crossfilter.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="/static/js/Graphs.js"></script>
+    
+  <script src="./static/lib/js/dc.js"></script>
+  <script src="./static/lib/js/queue.js"></script>
+  <script type="text/javascript" src="/static/js/Graphs.js"></script>
+
+  <script src="./static/lib/js/keen.min.js"></script>
+  <script src='./static/js/charts.js' type='text/javascript'></script>
+
+</head>
+
+<body class="application">
+      <!--div class="navbar container navbar-inverse navbar-fixed-top">
+        <h1 id ="my_header">
+          Analytics Dashboard
+        </h1>
+        <nav id="nav">
+          <ul>
+            <li>
+              <a href="./dashboard">Facebook</a>
+            </li>
+            <li>
+              <a href="./dashboard">RedWine</a>
+            </li>
+            <li>
+              <a href="./dashboard">WhiteWine</a>
+            </li>
+          </ul>
+        </nav>
+      </div-->
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="./dashboard">Facebook Dashboard</a>
+      </div>
+      <div class="navbar-header">
+        <a class="navbar-brand" href="./redwine">Red Wine Dashboard</a>
+      </div>
+      <div class="navbar-header">
+        <a class="navbar-brand" href="./whitewine">White Wine Dashboard</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+
+    <div class="row">
+
+      <div class="col-sm-6">
+        <div class="row">
+
+          <!-- Time Chart --> 
+          <div class="col-sm-12">
+            <div class="chart-wrapper">
+              <div class="chart-title">
+                Hourly Posts
+              </div>
+              <div class="chart-stage">
+                <div class='pie-graph span6' id='dc-scatter-plot'>
+                    <h4>Post reach based on post type</h4>
+                    <span><p>This visualization presents the reach of posts made in each hour while differentiating between paid and non paid posts</p></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Time Chart --> 
+
+          <!-- Resources Pie -->
+          <div class="col-sm-12">
+            <div class="chart-wrapper">
+              <div class="chart-title">
+                Interactions with Posts
+              </div>
+              <div class="chart-stage">
+                <div class='pie-graph span6' id='dc-type-chart'>
+                            <h4>Interactions by Post Type</h4>
+                            <span><p>This visualization shows how different types of posts perform</p></span>
+               
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Resources Pie -->
+
+          
+          <!-- Resources Pie -->
+          <div class="col-sm-12">
+            <div class="chart-wrapper">
+              <div class="chart-title">
+                Reach of Posts
+              </div>
+              <div class="chart-stage">
+                <div class='pie-graph span6' id='dc-pie-chart'>
+                            <h4>Reach by Post Type</h4>
+                            <span><p>This visualization shows the total percentage of people different types of posts reach</p></span>
+                             </div>
+              </div>
+            </div>
+          </div>
+          <!-- Resources Pie -->
+        </div>
+      </div>
+
+      <!-- Map -->  
+      <div class="col-sm-6">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Hourly Interactions
+          </div>
+          <div class="chart-stage">
+            <div class='span12' id='dc-time-chart'>
+                    <h4>Interactions based on hour of post</h4>
+                    <span><p>This visualization shows how different engagements metrics like
+                    likes, comments, shares and interactions varied based on the post hour</p></span>
+                </div>
+          </div>
+        </div>
+      </div>
+      <!-- Map -->
+
+      <!-- Metric 1 -->
+      <div class="col-sm-6">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            HeatMap for Post type/hour
+          </div>
+          <div class="chart-stage">
+            <div class='pie-graph span6' id='dc-post-heatmap'>
+                            <h4>Post type by the hour</h4>
+                            <span><p>This visualization presents the density(count)
+                                of the type of posts made each hour</p></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Metric 1 -->
+      <!-- Poverty Pie -->
+          <div class="col-sm-6">
+            <div class="chart-wrapper">
+              <div class="chart-title">
+                Monthly Posts
+              </div>
+              <div class="chart-stage">
+                <div class='pie-graph span6' id='dc-month-chart'>
+                            <h4>Interactions by Post Month</h4>
+                            <span><p>This visualization shows how the posts performed every month</p></span>
+                 </div>
+              </div>
+            </div>
+          </div>
+          <!-- Poverty Pie -->
+      <!-- Metric 2 -->
+      <!--div class="col-sm-3">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Total Donations in USD
+          </div>
+          <div class="chart-stage">
+            <div id="total-donations-nd"></div>
+          </div>
+        </div>
+      </div-->
+      <!-- Metric 2 -->
+
+    </div>
+
+  </div>
+
+    <hr>
+    <p class="small text-muted">Built with &#9829; by <a href="https://keen.io">Keen IO</a></p>
+
+  </div>
+
+
+</body>
+</html>

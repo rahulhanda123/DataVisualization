@@ -1,0 +1,156 @@
+<html>
+
+<head>
+    <title>Data template</title>
+    <link rel="stylesheet" href="./static/lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/lib/css/keen-dashboards.css">
+    <link href='./static/lib/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="./static/lib/css/dc.css" />
+    <link rel="stylesheet" type="text/css" href="./static/lib/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="./static/css/custom.css" />
+
+    <script src="./static/lib/js/jquery.min.js"></script>
+
+    <script src="./static/lib/js/crossfilter.js"></script>
+    <script src="./static/lib/js/d3.v3.min.js" charset="utf-8"></script>
+    <script src="./static/lib/js/dc.js"></script>
+    <script src='./static/js/MoviesData.js' type='text/javascript'></script>
+    <script src='./static/js/MoviesPred.js' type='text/javascript'></script>
+
+</head>
+<!--body onload="draw_graphs()"-->
+
+<body>
+
+
+    <div class="container">
+        <nav class="fixed-nav-bar">
+            <div class="row">
+                <div class="2u chart-wrapper" id="menuselect" style="background-color: #33CC99; height: 60px;">
+                    <div class="chart-title"> <strong> Genre Selector </strong> </div>
+                </div>
+
+                <!--div class="2u chart-wrapper" id="dc-type-chart">
+              <div class="chart-title">  <strong> Total Donation Count </strong> </div>         
+            </div>
+            <div class="2u chart-wrapper" id="dc-month-chart">
+              <div class="chart-title">  <strong> Nett Donations ($) </strong> </div>         
+            </div-->
+                <div class="2u chart-wrapper" id="total-projects">
+                    <div class="chart-title"> <strong> Total number of Movies </strong> </div>
+                </div>
+                <div class="2u chart-wrapper" id="net-projects">
+                    <div class="chart-title"> <strong> Number of movies selected</strong> </div>
+
+
+                    <div class="2u chart-wrapper dc-chart" id="row-selection" style="width:647px">
+                        <span class="filter-count">_</span> selected out of <span class="total-count">_</span> records |
+                        <span style="float:right">
+              <a href='javascript:dc.filterAll();dc.redrawAll();'><font color="#33CC99">Reset All</font></a>
+            </span>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+        <div class="row">
+            <blockquote class="blockquote " style="margin-top: 60;">
+                <p class="mb-0">
+                    And here it is! Movies data visualized with D3,DC, crossfilter and python libraries. The data was collected by scraping iMDB, oMDB and Rotten Tomatoes. It was minimally cleaned up by filtering for movies that have rating values missing and are in English. The data is presented Genre wise. As you can see this chart visualizes the number of genre movie released between 2000 and 2015, as well as the total number of movies in those years. A single movie may be associated with zero, one, or multiple genres and so the ‘Total Movies’ line corresponds to actual movie counts in that genre and You can select which genre you want to view in the drop down option at the top of the page. The rest of the date then adjusts for that particular genre, The clear conclusion is that hollywood follows a fixed formula as far as movie genres are concerned. The highest earning movies on average belong to <strong> Action,Adventure,Fantasy and Sci-fi Genres. </strong> Bit of Escapists arent we?
+                </p>
+                <footer class="blockquote-footer">The below graph is not interactive</footer>
+            </blockquote>
+            <div id="over" style="position:relative; width:100%; height:100%">
+                <img src="/get_image" alt="categories" style="width:600;height:600;">
+            </div>
+
+            <blockquote class="blockquote ">
+                <p class="mb-0">
+                    There has been an explosion in film production from 2004 onwards. If we select the timeline 2004-2012 from the below line chart, surprisingly the largest benificiary from this is the Drama genre. The point of making such an open-ended visualization is to encourage the viewer to find such patterns by themselves. There is a ton more that can be done with the data. The direction I decided to go with it was to show some example trends and then allow the user to discover more about the data. I would love to eventually add controls to view any year range for all the following charts, but they still reveal some interesting aspects about modern movies and IMDB metrics. An obvious place to start is with looking at how rating data is distributed, and the answer is delightfully normal:
+
+                </p>
+            </blockquote>
+        </div>
+
+
+        <div class="row">
+            <div class=".col-sm-2" id="date-chart" style="position:relative;top: 50%;left: 25%; right:25%">
+                <div class="chart-title bold"> <strong> Number of Movies per year </strong></div>
+
+            </div>
+        </div>
+        <div class="row">
+            <blockquote class="blockquote ">
+                <p class="mb-0">
+
+                    Now we do a comparison of Imdb ratings and tomato consenus on rotten tomatoes. Yep, a bell curve-ish kinda shape! Not overly suprising to see that most movies are rated as mediocre/good and the frequency flattens out at either extreme. Next, a slightly more fun shape from the length distribution:
+                </p>
+            </blockquote>
+        </div>
+        <div class="row" style="position:relative;top: 50%;left: 25%; right:25%">
+            <div class="4u chart-wrapper" id="resource-chart">
+                <div class="chart-title"> <strong>  imdb Rating Distribution </strong> </div>
+
+            </div>
+            <div class="3u chart-wrapper" id="funding-chart">
+                <div class="chart-title"> <strong> Tomato Meter </strong> </div>
+            </div>
+        </div>
+        <div class="row">
+            <blockquote class="blockquote ">
+                <p class="mb-0">
+
+                    For imdb ratings we see a nice bell curve. This is expected as most movies are rated average by majority of the populations and there are rare movies with high ratings.
+                    <br/> We can also interact with the tomato consensus pie chart and see how the bell curve changes with respect to fresh ,consensus and rotten ratings. Again we see a clear correlation between the voters on the two sites as <strong>rotten</strong> movies tend to have lower ratings on imdb as well.
+                </p>
+            </blockquote>
+        </div>
+
+        <blockquote class="blockquote ">
+                <p class="mb-0">
+                <strong>Runtime analysis of movies.</strong>
+                <br/>
+                One of the first things we note is how the longer movies have better imdb and tomato ratings. One of the examples that come to mind are the Lord of the Rings Trilogy famous for extra ordinary length of movies and how excellent they were.
+                </p>
+            </blockquote>
+        <div class="row" style="position:relative;top: 50%;left: 5%;">
+            <div class="4u chart-wrapper" id="grade-chart">
+                <div class="chart-title"> <strong> Runtime of movies </strong> </div>
+            </div>
+            </div>
+            <div class="row" style="position:relative;top: 50%;left: 5%;">
+            <blockquote class="blockquote ">
+                <p class="mb-0">The MPAA ratings for the movies show that the targeted audience are clearly teens and young adults.</p>
+            </blockquote>
+            <div class="4u chart-wrapper" id="poverty-chart">
+                <div class="chart-title"> <strong> Yearwise movie MPAA ratings distribution</strong></div>
+
+            </div>
+        </div>
+        <div class="row">
+            <blockquote class="blockquote ">
+                <p class="mb-0">In conclusion I have tried to use some machine learning algorithms to find out how some of the movies perform that is their box office revenue prediction. More details about the approach are given in the pdf for this project. The below bar graphs show the similarities between the training and the test data set for the machine learning algorithms.</p>
+            </blockquote>
+        </div>
+        <div class="row">
+            <div class="4u chart-wrapper" id="state-donations">
+                <div class="chart-title"> <strong> Number of movies per genre </strong>
+                </div>
+            </div>
+            <div class="row">
+                <div class="4u chart-wrapper" id="state-donations-pred">
+                    <div class="chart-title"> <strong> Predicted Collection according to genre(non interactive) </strong>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>
